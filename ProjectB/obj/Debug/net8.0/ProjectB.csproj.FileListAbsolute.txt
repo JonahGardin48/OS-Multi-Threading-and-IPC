@@ -10,3 +10,6 @@
 /root/OS-Multi-Threading-and-IPC/ProjectB/obj/Debug/net8.0/refint/ProjectB.dll
 /root/OS-Multi-Threading-and-IPC/ProjectB/obj/Debug/net8.0/ProjectB.pdb
 /root/OS-Multi-Threading-and-IPC/ProjectB/obj/Debug/net8.0/ref/ProjectB.dll
+/root/OS-Multi-Threading-and-IPC/ProjectB/bin/Debug/net8.0/ProjectB
+/root/OS-Multi-Threading-and-IPC/ProjectB/bin/Debug/net8.0/ProjectB.runtimeconfig.json
+/root/OS-Multi-Threading-and-IPC/ProjectB/obj/Debug/net8.0/ProjectB.genruntimeconfig.cache
