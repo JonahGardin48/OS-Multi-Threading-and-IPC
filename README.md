@@ -16,8 +16,8 @@ This project demonstrates the concepts of multi-threading and inter-process comm
 ### Instructions (Windows 10)
 
 1. **Enable WSL**
-    -Open your computer's Command Prompt Such As PowerShell
-    -Run the following Command and Restart as needed: wsl --install
+    - Open your computer's Command Prompt Such As PowerShell
+    - Run the following Command and Restart as needed: wsl --install
 
 2. **Install your Virtualization for a Linux Environment**
     *Ubuntu is the easiest option, as it is on the microsoft store
