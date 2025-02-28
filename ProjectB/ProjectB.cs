@@ -19,7 +19,11 @@ namespace ProjectB
 
         static async Task RunProducer()
         {
-            using (var pipeServer = new NamedPipeServerStream("ProjectBPipe", PipeDirection.Out, 1, PipeTransmissionMode.Message))
+            #if WINDOWS
+                        using (var pipeServer = new NamedPipeServerStream("ProjectBPipe", PipeDirection.Out, 1, PipeTransmissionMode.Message))
+            #else
+                        using (var pipeServer = new NamedPipeServerStream("ProjectBPipe", PipeDirection.Out, 1))
+            #endif
             {
                 Console.WriteLine("Producer: Waiting for connection...");
                 pipeServer.WaitForConnection();
