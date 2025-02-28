@@ -62,7 +62,10 @@ namespace ProjectBTests
                     {
                         writer.AutoFlush = true;
                         writer.WriteLine(expectedMessage);
-                        // Simulate pipe closure
+                                                // Simulate pipe closure
+                        #if WINDOWS
+                                                server.WaitForPipeDrain();
+                        #endif
                         server.Dispose();
                     }
                 });

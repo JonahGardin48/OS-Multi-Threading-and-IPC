@@ -10,7 +10,7 @@ namespace ProjectATests
         public void ConcurrencyTest()
         {
             // Arrange
-            int[] tables = new int[10];
+            bool[] tableReserved = new bool[10];
             Mutex[] tableMutexes = new Mutex[10];
             for (int i = 0; i < tableMutexes.Length; i++)
             {
@@ -24,7 +24,7 @@ namespace ProjectATests
                 int threadId = i;
                 threads[i] = new Thread(() =>
                 {
-                    MakeReservation(threadId, tables, tableMutexes);
+                    MakeReservation(threadId, tableReserved, tableMutexes);
                 });
                 threads[i].Start();
             }
@@ -36,18 +36,18 @@ namespace ProjectATests
 
             // Assert
             int totalReservations = 0;
-            foreach (int table in tables)
+            foreach (bool reserved in tableReserved)
             {
-                totalReservations += table;
+                if (reserved) totalReservations++;
             }
-            Assert.Equal(20, totalReservations); // Each thread reserves 2 tables
+            Assert.Equal(10, totalReservations); // Each thread reserves 1 table
         }
 
         [Fact]
         public void SynchronizationValidationTest()
         {
             // Arrange
-            int[] tables = new int[10];
+            bool[] tableReserved = new bool[10];
             Mutex[] tableMutexes = new Mutex[10];
             for (int i = 0; i < tableMutexes.Length; i++)
             {
@@ -61,7 +61,7 @@ namespace ProjectATests
                 int threadId = i;
                 threads[i] = new Thread(() =>
                 {
-                    MakeReservation(threadId, tables, tableMutexes);
+                    MakeReservation(threadId, tableReserved, tableMutexes);
                 });
                 threads[i].Start();
             }
@@ -72,9 +72,9 @@ namespace ProjectATests
             }
 
             // Assert
-            for (int i = 0; i < tables.Length; i++)
+            for (int i = 0; i < tableReserved.Length; i++)
             {
-                Assert.True(tables[i] <= 2, $"Table {i} was reserved more than twice."); // No table should be reserved more than twice
+                Assert.True(tableReserved[i], $"Table {i} was not reserved."); // Each table should be reserved once
             }
         }
 
@@ -82,7 +82,7 @@ namespace ProjectATests
         public void StressTest()
         {
             // Arrange
-            int[] tables = new int[10];
+            bool[] tableReserved = new bool[10];
             Mutex[] tableMutexes = new Mutex[10];
             for (int i = 0; i < tableMutexes.Length; i++)
             {
@@ -96,7 +96,7 @@ namespace ProjectATests
                 int threadId = i;
                 threads[i] = new Thread(() =>
                 {
-                    MakeReservation(threadId, tables, tableMutexes);
+                    MakeReservation(threadId, tableReserved, tableMutexes);
                 });
                 threads[i].Start();
             }
@@ -108,50 +108,36 @@ namespace ProjectATests
 
             // Assert
             int totalReservations = 0;
-            foreach (int table in tables)
+            foreach (bool reserved in tableReserved)
             {
-                totalReservations += table;
+                if (reserved) totalReservations++;
             }
-            Assert.Equal(200, totalReservations); // Each thread reserves 2 tables
+            Assert.Equal(10, totalReservations); // Each table should be reserved once
         }
 
-        private void MakeReservation(int id, int[] tables, Mutex[] tableMutexes)
+        private void MakeReservation(int id, bool[] tableReserved, Mutex[] tableMutexes)
         {
             Random random = new Random();
-            int table1 = random.Next(0, 10);
-            int table2 = random.Next(0, 10);
+            bool reserved = false;
 
-            while (table2 == table1)
+            while (!reserved)
             {
-                table2 = random.Next(0, 10);
-            }
+                int table = random.Next(0, 10);
 
-            int firstTable = Math.Min(table1, table2);
-            int secondTable = Math.Max(table1, table2);
-
-            if (tableMutexes[firstTable].WaitOne(1000))
-            {
-                try
+                if (tableMutexes[table].WaitOne(1000))
                 {
-                    if (tableMutexes[secondTable].WaitOne(1000))
+                    try
                     {
-                        try
+                        if (!tableReserved[table])
                         {
-                            lock (tables)
-                            {
-                                tables[table1]++;
-                                tables[table2]++;
-                            }
-                        }
-                        finally
-                        {
-                            tableMutexes[secondTable].ReleaseMutex();
+                            tableReserved[table] = true;
+                            reserved = true;
                         }
                     }
-                }
-                finally
-                {
-                    tableMutexes[firstTable].ReleaseMutex();
+                    finally
+                    {
+                        tableMutexes[table].ReleaseMutex();
+                    }
                 }
             }
         }

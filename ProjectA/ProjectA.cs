@@ -6,7 +6,7 @@ namespace ProjectA
     class ProjectA
     {
         private static readonly Mutex[] tableMutexes = new Mutex[10];
-        private static readonly int[] tables = new int[10];
+        private static readonly bool[] tableReserved = new bool[10];
 
         static void Main(string[] args)
         {
@@ -33,59 +33,40 @@ namespace ProjectA
             Console.WriteLine("All reservations completed.");
         }
 
+        private static readonly ThreadLocal<Random> threadLocalRandom = new ThreadLocal<Random>(() => new Random());
+
         static void MakeReservation(object? threadId)
         {
             int id = (int)threadId!;
-            Random random = new Random();
-            int table1 = random.Next(0, 10);
-            int table2 = random.Next(0, 10);
+            Random random = threadLocalRandom.Value!;
+            int table = random.Next(0, 10);
 
-            // Ensure different tables are selected
-            while (table2 == table1)
-            {
-                table2 = random.Next(0, 10);
-            }
+            Console.WriteLine($"Thread {id} attempting to reserve table {table}");
 
-            Console.WriteLine($"Thread {id} attempting to reserve tables {table1} and {table2}");
-
-            // Acquire locks in a consistent order to prevent deadlocks
-            int firstTable = Math.Min(table1, table2);
-            int secondTable = Math.Max(table1, table2);
-
-            if (tableMutexes[firstTable].WaitOne(1000))
+            if (tableMutexes[table].WaitOne(1000))
             {
                 try
                 {
-                    if (tableMutexes[secondTable].WaitOne(1000))
+                    // Check if the table is already reserved
+                    if (!tableReserved[table])
                     {
-                        try
-                        {
-                            // Simulate reservation process
-                            Console.WriteLine($"Thread {id} reserved tables {table1} and {table2}");
-                            lock (tables)
-                            {
-                                tables[table1]++;
-                                tables[table2]++;
-                            }
-                        }
-                        finally
-                        {
-                            tableMutexes[secondTable].ReleaseMutex();
-                        }
+                        // Simulate reservation process
+                        Console.WriteLine($"Thread {id} reserved table {table}");
+                        tableReserved[table] = true;
                     }
                     else
                     {
-                        Console.WriteLine($"Thread {id} timeout waiting for table {secondTable}");
+                        Console.WriteLine($"Thread {id} found table {table} already reserved");
                     }
                 }
                 finally
                 {
-                    tableMutexes[firstTable].ReleaseMutex();
+                    tableMutexes[table].ReleaseMutex();
                 }
             }
             else
             {
-                Console.WriteLine($"Thread {id} timeout waiting for table {firstTable}");
+                Console.WriteLine($"Thread {id} timeout waiting for table {table}");
             }
         }
     }
