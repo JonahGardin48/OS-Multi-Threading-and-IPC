@@ -1,0 +1,15 @@
+/root/OS-Multi-Threading-and-IPC/ProjectA/bin/Debug/net8.0/ProjectA
+/root/OS-Multi-Threading-and-IPC/ProjectA/bin/Debug/net8.0/ProjectA.deps.json
+/root/OS-Multi-Threading-and-IPC/ProjectA/bin/Debug/net8.0/ProjectA.runtimeconfig.json
+/root/OS-Multi-Threading-and-IPC/ProjectA/bin/Debug/net8.0/ProjectA.dll
+/root/OS-Multi-Threading-and-IPC/ProjectA/bin/Debug/net8.0/ProjectA.pdb
+/root/OS-Multi-Threading-and-IPC/ProjectA/obj/Debug/net8.0/ProjectA.GeneratedMSBuildEditorConfig.editorconfig
+/root/OS-Multi-Threading-and-IPC/ProjectA/obj/Debug/net8.0/ProjectA.AssemblyInfoInputs.cache
+/root/OS-Multi-Threading-and-IPC/ProjectA/obj/Debug/net8.0/ProjectA.AssemblyInfo.cs
+/root/OS-Multi-Threading-and-IPC/ProjectA/obj/Debug/net8.0/ProjectA.csproj.CoreCompileInputs.cache
+/root/OS-Multi-Threading-and-IPC/ProjectA/obj/Debug/net8.0/ProjectA.sourcelink.json
+/root/OS-Multi-Threading-and-IPC/ProjectA/obj/Debug/net8.0/ProjectA.dll
+/root/OS-Multi-Threading-and-IPC/ProjectA/obj/Debug/net8.0/refint/ProjectA.dll
+/root/OS-Multi-Threading-and-IPC/ProjectA/obj/Debug/net8.0/ProjectA.pdb
+/root/OS-Multi-Threading-and-IPC/ProjectA/obj/Debug/net8.0/ProjectA.genruntimeconfig.cache
+/root/OS-Multi-Threading-and-IPC/ProjectA/obj/Debug/net8.0/ref/ProjectA.dll

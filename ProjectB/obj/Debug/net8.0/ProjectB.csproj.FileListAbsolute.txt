@@ -1,0 +1,12 @@
+/root/OS-Multi-Threading-and-IPC/ProjectB/bin/Debug/net8.0/ProjectB.deps.json
+/root/OS-Multi-Threading-and-IPC/ProjectB/bin/Debug/net8.0/ProjectB.dll
+/root/OS-Multi-Threading-and-IPC/ProjectB/bin/Debug/net8.0/ProjectB.pdb
+/root/OS-Multi-Threading-and-IPC/ProjectB/obj/Debug/net8.0/ProjectB.GeneratedMSBuildEditorConfig.editorconfig
+/root/OS-Multi-Threading-and-IPC/ProjectB/obj/Debug/net8.0/ProjectB.AssemblyInfoInputs.cache
+/root/OS-Multi-Threading-and-IPC/ProjectB/obj/Debug/net8.0/ProjectB.AssemblyInfo.cs
+/root/OS-Multi-Threading-and-IPC/ProjectB/obj/Debug/net8.0/ProjectB.csproj.CoreCompileInputs.cache
+/root/OS-Multi-Threading-and-IPC/ProjectB/obj/Debug/net8.0/ProjectB.sourcelink.json
+/root/OS-Multi-Threading-and-IPC/ProjectB/obj/Debug/net8.0/ProjectB.dll
+/root/OS-Multi-Threading-and-IPC/ProjectB/obj/Debug/net8.0/refint/ProjectB.dll
+/root/OS-Multi-Threading-and-IPC/ProjectB/obj/Debug/net8.0/ProjectB.pdb
+/root/OS-Multi-Threading-and-IPC/ProjectB/obj/Debug/net8.0/ref/ProjectB.dll
