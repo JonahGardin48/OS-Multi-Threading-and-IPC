@@ -1,49 +1,39 @@
 using System;
 using System.IO;
 using System.IO.Pipes;
+using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace ProjectB
 {
     class ProjectB
     {
-        static async Task Main(string[] args)
+        static async Task Main()
         {
-            // Handle nullable string example
-            string? nullableString = GetNullableString();
-            string nonNullableString = nullableString ?? "default value";
-            Console.WriteLine(nonNullableString);
-
-            // Run producer and consumer tasks
-            var producerTask = Task.Run(() => RunProducer());
-            var consumerTask = Task.Run(() => RunConsumer());
+            var producerTask = Task.Run(RunProducer);
+            var consumerTask = Task.Run(RunConsumer);
 
             await Task.WhenAll(producerTask, consumerTask);
         }
 
-        static string? GetNullableString()
-        {
-            // Simulate a method that might return null
-            return null;
-        }
-
         static async Task RunProducer()
         {
-            using (var pipeServer = new NamedPipeServerStream("testpipe", PipeDirection.Out))
+            using (var pipeServer = new NamedPipeServerStream("ProjectBPipe", PipeDirection.Out, 1, PipeTransmissionMode.Message))
             {
-                Console.WriteLine("Named pipe server waiting for connection...");
+                Console.WriteLine("Producer: Waiting for connection...");
                 pipeServer.WaitForConnection();
-                Console.WriteLine("Client connected.");
+                Console.WriteLine("Producer: Client connected.");
 
-                using (var writer = new StreamWriter(pipeServer))
+                using (var writer = new StreamWriter(pipeServer, Encoding.UTF8, leaveOpen: true))
                 {
                     writer.AutoFlush = true;
-                    for (int i = 0; i < 10; i++)
+                    for (int i = 1; i <= 10; i++)
                     {
                         string message = $"Message {i}";
-                        Console.WriteLine($"Sending: {message}");
+                        Console.WriteLine($"Producer: Sending - {message}");
                         await writer.WriteLineAsync(message);
-                        await Task.Delay(500); // Simulate some work
+                        await Task.Delay(200); // Simulate processing delay
                     }
                 }
             }
@@ -51,18 +41,18 @@ namespace ProjectB
 
         static async Task RunConsumer()
         {
-            using (var pipeClient = new NamedPipeClientStream(".", "testpipe", PipeDirection.In))
+            using (var pipeClient = new NamedPipeClientStream(".", "ProjectBPipe", PipeDirection.In))
             {
-                Console.WriteLine("Connecting to named pipe server...");
+                Console.WriteLine("Consumer: Connecting to producer...");
                 pipeClient.Connect();
-                Console.WriteLine("Connected to server.");
+                Console.WriteLine("Consumer: Connected to producer.");
 
-                using (var reader = new StreamReader(pipeClient))
+                using (var reader = new StreamReader(pipeClient, Encoding.UTF8))
                 {
                     string? message;
                     while ((message = await reader.ReadLineAsync()) != null)
                     {
-                        Console.WriteLine($"Received: {message}");
+                        Console.WriteLine($"Consumer: Received - {message}");
                     }
                 }
             }
