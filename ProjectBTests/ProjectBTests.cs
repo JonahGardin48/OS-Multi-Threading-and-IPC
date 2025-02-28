@@ -41,7 +41,6 @@ namespace ProjectBTests
                 await Task.WhenAll(serverTask, clientTask);
             }
 
-            // Assert
             Assert.Equal(expectedMessage, actualMessage);
         }
 
@@ -103,7 +102,6 @@ namespace ProjectBTests
             using (var server = new AnonymousPipeServerStream(PipeDirection.Out, HandleInheritability.Inheritable))
             using (var client = new AnonymousPipeClientStream(PipeDirection.In, server.GetClientHandleAsString()))
             {
-                // Act
                 var stopwatch = Stopwatch.StartNew();
 
                 var serverTask = Task.Run(() =>
@@ -121,10 +119,8 @@ namespace ProjectBTests
                 });
 
                 await Task.WhenAll(serverTask, clientTask);
-
                 stopwatch.Stop();
 
-                // Assert
                 Assert.Equal(data, receivedData);
                 Console.WriteLine($"Time taken: {stopwatch.ElapsedMilliseconds} ms");
             }
