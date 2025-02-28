@@ -20,40 +20,40 @@ This project demonstrates the concepts of multi-threading and inter-process comm
     - Run the following Command and Restart as needed: wsl --install
 
 2. **Install your Virtualization for a Linux Environment**
-    *Ubuntu is the easiest option, as it is on the microsoft store
+    - Ubuntu is the easiest option, as it is on the microsoft store
 
 3. **Install the compiler onto the virtualization setup**
-    *This repo uses C#, so install .NET SDK by
-        *In the Virtualization Terminal, run these commands
-            * sudo apt update
-            * sudo apt install -y wget apt-transport-https
-            * wget https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
-            * sudo dpkg -i packages-microsoft-prod.deb
-            * sudo apt update
-            *sudo apt install -y dotnet-sdk-8.0
+    - This repo uses C#, so install .NET SDK by
+         - In the Virtualization Terminal, run these commands
+            - sudo apt update
+            - sudo apt install -y wget apt-transport-https
+            - wget https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
+            - sudo dpkg -i packages-microsoft-prod.deb
+            - sudo apt update
+            - sudo apt install -y dotnet-sdk-8.0
 
 4. **Cloning the Repository**
-    *In the Virtualization Terminal, run these commands
-        *sudo apt install -y git
-        *git clone https://github.com/your-repository/OS-Multi-Threading-and-IPC.git    
+    - In the Virtualization Terminal, run these commands
+        - sudo apt install -y git
+        - git clone https://github.com/your-repository/OS-Multi-Threading-and-IPC.git    
 
 5. **Build the Project**
-    *cd into the directory with : cd OS-Multi-Threading-and-IPC
-    *Build and Run Project A
-        *Navigate in the terminal : cd ProjectA
-        *Build the Project: dotnet build
-        *Run the Project: dotnet Run
-    *Build and Run Project b
-        *Navigate in the terminal : cd ProjectB
-        *Build the Project: dotnet build
-        *Run the Project: dotnet Run
+    - cd into the directory with : cd OS-Multi-Threading-and-IPC
+    - Build and Run Project A
+        - Navigate in the terminal : cd ProjectA
+        - Build the Project: dotnet build
+        - Run the Project: dotnet Run
+    - Build and Run Project b
+        - Navigate in the terminal : cd ProjectB
+        - Build the Project: dotnet build
+        - Run the Project: dotnet Run
 
 6. **Running Unit Tests**
-    *Build and Test Project A
-        *Navigate in the terminal: cd ../ProjectATests
-        *Build the tests: dotnet build
-        *Run the tests: dotnet test
-    *Build and Test Project B
-        *Navigate in the terminal: cd ../ProjectBTests
-        *Build the tests: dotnet build
-        *Run the tests: dotnet test   
+    - Build and Test Project A
+        - Navigate in the terminal: cd ../ProjectATests
+        - Build the tests: dotnet build
+        - Run the tests: dotnet test
+    - Build and Test Project B
+        - Navigate in the terminal: cd ../ProjectBTests
+        - Build the tests: dotnet build
+        - Run the tests: dotnet test   
