@@ -38,8 +38,7 @@ namespace ProjectA
         static void MakeReservation(object? threadId)
         {
             int id = (int)threadId!;
-            Random random = threadLocalRandom.Value!;
-            int table = random.Next(0, 10);
+            Random random = threadLocalRandom.Value!;            int table = random.Next(0, 10);
 
             Console.WriteLine($"Thread {id} attempting to reserve table {table}");
 
