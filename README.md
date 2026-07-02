@@ -1,59 +1,96 @@
-# OS-Multi-Threading-and-IPC
+# OS Multi-Threading & IPC Simulator
 
-## Overview
+A C# / .NET project demonstrating two core operating systems concepts — **multi-threading with synchronization** and **inter-process communication (IPC)** — through practical, scenario-based implementations built and tested independently.
 
-This project demonstrates the concepts of multi-threading and inter-process communication (IPC) using C# and .NET. It consists of two main parts:
+## Projects
 
-1. **Project A: Multi-Threading Implementation**
-   - This project showcases the use of threads to perform concurrent operations, resource protection using mutexes, deadlock creation, and deadlock resolution in a restaurant reservation scenario.
+### Project A — Multi-Threading Implementation
+Simulates a restaurant reservation system where multiple threads compete for shared resources. Demonstrates:
+- **Concurrent thread execution** — multiple threads performing simultaneous operations
+- **Mutex-based resource protection** — preventing race conditions on shared reservation data
+- **Deadlock creation** — intentionally inducing a deadlock to illustrate the conditions under which they occur
+- **Deadlock resolution** — implementing strategies to detect and recover from deadlocked states
 
-2. **Project B: Inter-Process Communication (IPC)**
-   - This project demonstrates communication between processes using named pipes. It implements a basic producer-consumer pattern where the producer writes messages to a pipe and the consumer reads messages from the pipe.
+### Project B — Inter-Process Communication (IPC)
+Implements a producer-consumer communication pattern between two separate processes using **named pipes**:
+- **Producer process** — writes messages to a named pipe
+- **Consumer process** — reads and processes messages from the pipe
+- Demonstrates how independent processes communicate without shared memory
 
-## Project A: Multi-Threading Implementation
+## What It Demonstrates
 
+- Thread lifecycle management and synchronization primitives (mutexes)
+- The four necessary conditions for deadlock and how to break them
+- IPC via named pipes as an alternative to shared memory
+- Unit testing concurrent systems in .NET (`ProjectATests`, `ProjectBTests`)
 
-### Instructions (Windows 10)
+## Language & Tools
 
-1. **Enable WSL**
-    - Open your computer's Command Prompt Such As PowerShell
-    - Run the following Command and Restart as needed: wsl --install
+- **Language:** C#
+- **Platform:** .NET 8.0
+- **IDE:** Visual Studio / VS Code
+- **OS:** Linux (Ubuntu via WSL) recommended
 
-2. **Install your Virtualization for a Linux Environment**
-    - Ubuntu is the easiest option, as it is on the microsoft store
+## How to Run
 
-3. **Install the compiler onto the virtualization setup**
-    - This repo uses C#, so install .NET SDK by
-         - In the Virtualization Terminal, run these commands
-            - sudo apt update
-            - sudo apt install -y wget apt-transport-https
-            - wget https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
-            - sudo dpkg -i packages-microsoft-prod.deb
-            - sudo apt update
-            - sudo apt install -y dotnet-sdk-8.0
+### Prerequisites
 
-4. **Cloning the Repository**
-    - In the Virtualization Terminal, run these commands
-        - sudo apt install -y git
-        - git clone https://github.com/your-repository/OS-Multi-Threading-and-IPC.git    
+1. **WSL (Windows Subsystem for Linux)** — open PowerShell and run:
+   ```
+   wsl --install
+   ```
+   Restart when prompted.
 
-5. **Build the Project**
-    - cd into the directory with : cd OS-Multi-Threading-and-IPC
-    - Build and Run Project A
-        - Navigate in the terminal : cd ProjectA
-        - Build the Project: dotnet build
-        - Run the Project: dotnet Run
-    - Build and Run Project b
-        - Navigate in the terminal : cd ProjectB
-        - Build the Project: dotnet build
-        - Run the Project: dotnet Run
+2. **Ubuntu** — available on the Microsoft Store (easiest Linux environment for WSL).
 
-6. **Running Unit Tests**
-    - Build and Test Project A
-        - Navigate in the terminal: cd ../ProjectATests
-        - Build the tests: dotnet build
-        - Run the tests: dotnet test
-    - Build and Test Project B
-        - Navigate in the terminal: cd ../ProjectBTests
-        - Build the tests: dotnet build
-        - Run the tests: dotnet test   
+3. **Install .NET SDK 8.0** — in your Ubuntu terminal:
+   ```bash
+   sudo apt update
+   sudo apt install -y wget apt-transport-https
+   wget https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
+   sudo dpkg -i packages-microsoft-prod.deb
+   sudo apt update
+   sudo apt install -y dotnet-sdk-8.0
+   ```
+
+4. **Install Git:**
+   ```bash
+   sudo apt install -y git
+   ```
+
+### Clone & Run
+
+```bash
+git clone https://github.com/JonahGardin48/OS-Multi-Threading-and-IPC.git
+cd OS-Multi-Threading-and-IPC
+```
+
+**Run Project A (Multi-Threading):**
+```bash
+cd ProjectA
+dotnet build
+dotnet run
+```
+
+**Run Project B (IPC):**
+```bash
+cd ProjectB
+dotnet build
+dotnet run
+```
+
+### Running Unit Tests
+
+**Test Project A:**
+```bash
+cd ProjectATests
+dotnet build
+dotnet test
+```
+
+**Test Project B:**
+```bash
+cd ProjectBTests
+dotnet build
+dotnet test
+```
