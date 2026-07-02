@@ -1,0 +1,7 @@
+
+*.xml linguist-detectable=false
+*.props linguist-detectable=false
+*.targets linguist-detectable=false
+*.csproj linguist-detectable=false
+*.sln linguist-detectable=false
+*.config linguist-detectable=false
